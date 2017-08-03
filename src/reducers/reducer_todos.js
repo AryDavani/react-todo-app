@@ -12,7 +12,7 @@ export default function(state=TODOS, action) {
       return [...state, action.payload];
       break;
     case 'DELETE_TODO':
-      return
+      return _.reject(state, action.payload);
 
     default:
       return state;

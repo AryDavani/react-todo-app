@@ -79,7 +79,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addTodo: addTodo }, dispatch);
+  return bindActionCreators({ addTodo: addTodo, deleteTodo: deleteTodo }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
