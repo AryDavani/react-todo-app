@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {addTodo, deleteTodo, updateTodo, filterTodo} from '../actions/index';
 import {bindActionCreators} from 'redux';
 import _ from 'lodash';
 
 
-export default class TodoList extends Component {
+class TodoList extends Component {
   constructor() {
     super();
 
@@ -27,17 +28,44 @@ export default class TodoList extends Component {
     console.log("form submitted ");
   }
 
-  render(){
+  render() {
+    console.log("todos", this.props.todos);
 
-    let todos =
+    let allTodos = this.props.todos.map((todo, index) => {
+      return (
+        <li key={ index }>
+          <h2>{ todo.title }</h2>
+          <button className="btn btn-danger">Delete</button>
+          <button className="btn btn-primary">Mark Complete</button>
+        </li>
+      )
+    })
 
     return (
       <div className="well">
+
         <form onSubmit={ this._handleFormSubmit }>
           <input onChange={ this._handleChange } value={ this.state.title } className="" type="text" placeholder="enter a todo"/>
           <button type="submit">Submit</button>
         </form>
+
+        <ul>
+          { allTodos }
+        </ul>
+
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    todos: state.todos
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ addTodo: addTodo }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
