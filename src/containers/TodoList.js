@@ -16,6 +16,7 @@ class TodoList extends Component {
 
     this._handleChange = this._handleChange.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleOptions = this._handleOptions.bind(this);
   }
 
   _handleChange(event){
@@ -26,6 +27,10 @@ class TodoList extends Component {
 
   _handleFormSubmit(event){
     console.log("form submitted ");
+  }
+
+  _handleOptions(event){
+    console.log("selected", event.target.value);
   }
 
   render() {
@@ -48,6 +53,12 @@ class TodoList extends Component {
           <input onChange={ this._handleChange } value={ this.state.title } className="" type="text" placeholder="enter a todo"/>
           <button type="submit">Submit</button>
         </form>
+
+        <select onChange={ this._handleOptions }>
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="incomplete">Incomlete</option>
+        </select>
 
         <ul>
           { allTodos }
