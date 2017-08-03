@@ -26,7 +26,10 @@ class TodoList extends Component {
   }
 
   _handleFormSubmit(event){
-    console.log("form submitted ");
+    event.preventDefault();
+
+    let todo = {title: this.state.title, completed: false};
+    this.props.addTodo(todo);
   }
 
   _handleOptions(event){
@@ -34,13 +37,13 @@ class TodoList extends Component {
   }
 
   render() {
-    console.log("todos", this.props.todos);
+    // console.log("todos", this.props.todos);
 
     let allTodos = this.props.todos.map((todo, index) => {
       return (
         <li key={ index }>
           <h2>{ todo.title }</h2>
-          <button className="btn btn-danger">Delete</button>
+          <button onClick={ () => this.props.deleteTodo(todo)} className="btn btn-danger">Delete</button>
           <button className="btn btn-primary">Mark Complete</button>
         </li>
       )
