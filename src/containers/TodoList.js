@@ -19,32 +19,35 @@ class TodoList extends Component {
     this._handleOptions = this._handleOptions.bind(this);
   }
 
+
   _handleChange(event){
     this.setState({
       title: event.target.value
     })
   }
 
+
   _handleFormSubmit(event){
     event.preventDefault();
-
     let todo = {title: this.state.title, completed: false};
     this.props.addTodo(todo);
   }
+
 
   _handleOptions(event){
     console.log("selected", event.target.value);
   }
 
+
   render() {
-    // console.log("todos", this.props.todos);
 
     let allTodos = this.props.todos.map((todo, index) => {
+      console.log(todo);
       return (
         <li key={ index }>
           <h2>{ todo.title }</h2>
           <button onClick={ () => this.props.deleteTodo(todo)} className="btn btn-danger">Delete</button>
-          <button className="btn btn-primary">Mark Complete</button>
+          <button onClick={ () => this.props.updateTodo(todo) } className="btn btn-primary">{ todo.completed ? "Mark Incomplete" : "Mark Complete" }</button>
         </li>
       )
     })
@@ -54,7 +57,7 @@ class TodoList extends Component {
 
         <form onSubmit={ this._handleFormSubmit }>
           <input onChange={ this._handleChange } value={ this.state.title } className="" type="text" placeholder="enter a todo"/>
-          <button type="submit">Submit</button>
+          <button className="btn btn-success" type="submit">Submit</button>
         </form>
 
         <select onChange={ this._handleOptions }>
@@ -79,7 +82,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ addTodo: addTodo, deleteTodo: deleteTodo }, dispatch);
+  return bindActionCreators({ addTodo: addTodo, deleteTodo: deleteTodo, updateTodo: updateTodo }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);

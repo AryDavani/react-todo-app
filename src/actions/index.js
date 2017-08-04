@@ -34,6 +34,7 @@ export function filterTodo(filter) {
 // action to update todo to complete or incomplete
 
 export function updateTodo(todo) {
+  console.log('todo', todo);
   return {
     type: UPDATE_TODO,
     payload: todo
