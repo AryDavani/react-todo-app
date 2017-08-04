@@ -11,7 +11,7 @@ class TodoList extends Component {
 
     this.state = {
       title: '',
-      completed: false
+      filter: 'All'
     }
 
     this._handleChange = this._handleChange.bind(this);
@@ -35,14 +35,26 @@ class TodoList extends Component {
 
 
   _handleOptions(event){
+    this.setState({
+      filter: event.target.value
+    });
+    console.log("todos equal", this.props.todos);
     console.log("selected", event.target.value);
   }
 
 
   render() {
+    let todos = this.props.todos.filter((todo) => {
+      if(todo.completed && this.state.filter === 'Completed'){
+        return todo;
+      } else if (!todo.completed && this.state.filter === 'Incomplete') {
+        return todo;
+      } else if (this.state.filter === 'All') {
+        return todo;
+      }
+    });
 
-    let allTodos = this.props.todos.map((todo, index) => {
-      console.log(todo);
+    todos = todos.map((todo, index) => {
       return (
         <li key={ index }>
           <h2>{ todo.title }</h2>
@@ -61,13 +73,13 @@ class TodoList extends Component {
         </form>
 
         <select onChange={ this._handleOptions }>
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="incomplete">Incomlete</option>
+          <option value="All">All</option>
+          <option value="Completed">Completed</option>
+          <option value="Incomplete">Incomplete</option>
         </select>
 
         <ul>
-          { allTodos }
+          { todos }
         </ul>
 
       </div>
