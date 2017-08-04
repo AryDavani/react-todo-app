@@ -22,15 +22,6 @@ export function deleteTodo(todo) {
   }
 }
 
-// action to filter the todos by all, complete, or incomplete
-
-export function filterTodo(filter) {
-  return {
-    type: FILTER_TODO,
-    payload: filter
-  }
-}
-
 // action to update todo to complete or incomplete
 
 export function updateTodo(todo) {

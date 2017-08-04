@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addTodo, deleteTodo, updateTodo, filterTodo} from '../actions/index';
+import {addTodo, deleteTodo, updateTodo} from '../actions/index';
 import {bindActionCreators} from 'redux';
-import _ from 'lodash';
 
 
 class TodoList extends Component {

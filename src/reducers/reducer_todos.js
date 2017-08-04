@@ -11,15 +11,12 @@ export default function(state=TODOS, action) {
 
     case ADD_TODO:
       return [...state, action.payload];
-      break;
 
     case DELETE_TODO:
       return _.reject(state, action.payload);
-      break;
 
     case UPDATE_TODO:
       return state.map((todo) => (todo === action.payload) ? { ...todo, completed: !todo.completed } : todo )
-      break;
 
     default:
       return state;
